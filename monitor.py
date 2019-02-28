@@ -20,4 +20,9 @@ class Monitor(object):
 
     def check_nodes(self):
         for node in self._cluster.cluster_nodes:
-            self._monitor_log.add_entry(node.node_name, node.ipaddress, datetime.datetime.now(), node.current_load)
+            self._monitor_log.add_entry(
+                node.node_name,
+                node.ipaddress,
+                datetime.datetime.now(),
+                node.current_load,
+            )

@@ -10,31 +10,36 @@ class Cluster(object):
         self.cluster_nodes.append(new_node)
 
     def refresh_node_loads(self):
-        print('\nRefreshing node loads...')
+        print("\nRefreshing node loads...")
         for node in self.cluster_nodes:
             node.refresh_node_load()
         print("...Node refresh complete.")
 
     def balance(self):
-        print('\nBalancing node loads...')
+        print("\nBalancing node loads...")
         average_load = self._get_node_load_average()
-        (bignode, smallnode) = self._get_big_and_small_nodes()
-        if bignode.current_load == 0 and smallnode.current_load == 0:
-            print('!!! Node loads are zero ???')
+        (big_node, small_node) = self._get_big_and_small_nodes()
+        if big_node.current_load == 0 and small_node.current_load == 0:
+            print("!!! Node loads are zero ???")
             return
-        while (smallnode.current_load < average_load) or (bignode.current_load > (average_load + 1)):
+        while (small_node.current_load < average_load) or (
+            big_node.current_load > (average_load + 1)
+        ):
             # This is cheating for the sake of demo, we really want to move actual items from one node to another
-            print('Moving item from node {0} ({1}) to node {2} ({3}).'.format(bignode.node_name,
-                                                                              bignode.current_load,
-                                                                              smallnode.node_name,
-                                                                              smallnode.current_load))
-            bignode.current_load -= 1
-            smallnode.current_load += 1
-            (bignode, smallnode) = self._get_big_and_small_nodes()
+            print(
+                "Moving item from node {0} ({1}) to node {2} ({3}).".format(
+                    big_node.node_name,
+                    big_node.current_load,
+                    small_node.node_name,
+                    small_node.current_load,
+                )
+            )
+            big_node.current_load -= 1
+            small_node.current_load += 1
+            (big_node, small_node) = self._get_big_and_small_nodes()
         # A small pause to ensure the monitor sees the balanced cluster.
         time.sleep(2)
-        print('...Load balancing complete.')
-
+        print("...Load balancing complete.")
 
     def _get_big_and_small_nodes(self):
         big = None

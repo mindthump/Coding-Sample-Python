@@ -7,7 +7,7 @@ class MonitorLog(object):
         self.log.append(_LogEntry(node_name, node_ip, timestamp, current_load))
 
     def dump(self):
-        print('\n\nMONITOR LOG:')
+        print("\n\nMONITOR LOG:")
         for logentry in self.log:
             print(str(logentry))
 
@@ -20,5 +20,6 @@ class _LogEntry(object):
         self.current_load = current_load
 
     def __str__(self):
-        return '{0} || Node {1} IP = {2} Load = {3}'.format(self.timestamp, self.node_name, self.node_ip,
-                                                            self.current_load)
+        return "{0} || Node {1} IP = {2} Load = {3}".format(
+            self.timestamp, self.node_name, self.node_ip, self.current_load
+        )
