@@ -6,3 +6,5 @@ RUN curl -Lo omz-install.sh https://raw.githubusercontent.com/robbyrussell/oh-my
 RUN git clone https://github.com/mindthump/dotfiles.git ~/.dotfiles \
     && rm -f ~/.zshrc omz-install.sh \
     && stow --dir ~/.dotfiles --stow zsh
+
+CMD ["python", "-version"]

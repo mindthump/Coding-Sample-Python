@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 
-import monitorlog
-import cluster
-import node
-import monitor
+from load_balancing import node, monitor, cluster, monitorlog
 import threading
 
 
